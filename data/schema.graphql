@@ -1,0 +1,23 @@
+type Ingredient{
+    IngredientId: ID!
+    Name: String
+    AllergyType: String
+}
+
+type Recipe{
+    RecipeID: ID!
+    RecipeName: String
+    ImageUrl: String
+    Ingredients: [Ingredient]
+}
+
+type Query{
+    recipe(id: ID!): Recipe
+    ingredient(id: ID!): Ingredient
+}
+
+type Mutation{
+    addRecipe(RecipeName: String, ImageUrl: String): Recipe
+    updateRecipe(RecipeID: ID!, RecipeName: String, ImageUrl: String): Recipe
+    deleteRecipe(RecipeID: ID!): int
+}
