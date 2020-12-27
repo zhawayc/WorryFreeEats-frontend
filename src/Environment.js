@@ -9,8 +9,9 @@ import {
     operation,
     variables,
   ) {
-    return fetch('/graphql', {
+    return fetch('http://localhost:8080/graphql', {
       method: 'POST',
+      mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
       },

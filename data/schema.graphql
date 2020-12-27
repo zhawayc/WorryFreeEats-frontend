@@ -13,11 +13,12 @@ type Recipe{
 
 type Query{
     recipe(id: ID!): Recipe
+    recipes: [Recipe]
     ingredient(id: ID!): Ingredient
 }
 
 type Mutation{
     addRecipe(RecipeName: String, ImageUrl: String): Recipe
     updateRecipe(RecipeID: ID!, RecipeName: String, ImageUrl: String): Recipe
-    deleteRecipe(RecipeID: ID!): int
+    deleteRecipe(RecipeID: ID!): Int
 }
