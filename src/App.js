@@ -10,26 +10,28 @@ function App(props) {
     return props;
   }
 
+  const appQuery = graphql`
+    query AppQuery($id: ID!, $ingredientId: ID!) {
+        recipe(id: $id) {
+          RecipeID
+          RecipeName
+        }
+
+        recipes {
+          ...Recipes_recipes
+        }
+
+        ingredient(id: $ingredientId){
+          IngredientId
+          Name
+        }
+      }
+  `;
+
   return (
     <QueryRenderer
       environment={environment}
-      query={graphql`
-        query AppQuery($id: ID!, $ingredientId: ID!) {
-            recipe(id: $id) {
-              RecipeID
-              RecipeName
-            }
-
-            recipes {
-              ...Recipes_recipes
-            }
-
-            ingredient(id: $ingredientId){
-              IngredientId
-              Name
-            }
-          }
-      `}
+      query={appQuery}
       variables={{id: "6663", ingredientId: 2}}
       render={({error, props}) => {
         if (error) {

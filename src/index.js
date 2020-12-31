@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import AppContainer from "./flux/AppContainer.js";
 import {HashRouter, Switch} from "react-router-dom";
 import {createHashHistory} from "history";
+import "./index.css";
 
 const customHistory = createHashHistory();
 

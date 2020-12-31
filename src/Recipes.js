@@ -9,14 +9,36 @@ class Recipes extends React.Component{
         this.props.onGetList(this.props.recipes);
     }
 
+    handleClick(id){
+        this.props.history.push(`recipe/${id}`)
+    }
+
+    getAllergies(ingredients){
+        let allergies = new Set();
+        for(let ingredient of ingredients){
+            if(ingredient.AllergyType=="NotAllergy"){
+                continue;
+            }
+            allergies.add(ingredient.AllergyType);
+        }
+        let arr = new Array(...allergies);
+        return arr.map(allergy=>(
+            <div>{allergy}</div>
+        ))
+    }
+
     render(){
         const list_recipes = this.props.recipes.map(recipe=>{
+            console.log(recipe.Ingredients);
             const ingredients = recipe.Ingredients.map(i=><div>{i.Name}</div>)
             return (
                 <tr>
                     <td>{recipe.RecipeID}</td>
                     <td><img src={recipe.ImageUrl} alt="not found" width="200px" height="180px" /></td>
-                    <td>{recipe.RecipeName}</td>
+                    <td onClick={()=>{this.handleClick(recipe.RecipeID)}}>
+                        {recipe.RecipeName}
+                    </td>
+                    <td>{this.getAllergies(recipe.Ingredients)}</td>
                     <td>{ingredients}</td>
                     <td><Link to={`/updateRecipe/${recipe.RecipeID}`}>Update</Link></td>
                     <td><Link to={`/deleteRecipe/${recipe.RecipeID}`}>Delete</Link></td>
@@ -33,6 +55,7 @@ class Recipes extends React.Component{
                             <td>Id</td>
                             <td>Image</td>
                             <td>Name</td>
+                            <td style={{backgroundColor: "royalblue"}}>Attention</td>
                             <td>Ingredients</td>
                             <td>Update</td>
                             <td>Delete</td>

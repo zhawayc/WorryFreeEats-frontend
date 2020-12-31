@@ -3,6 +3,7 @@ import App from './App';
 import UpdateRecipe from "./UpdateRecipe";
 import CreateRecipe from "./CreateRecipe";
 import DeleteRecipe from "./DeleteRecipe.js";
+import Recipe from "./Recipe";
 
 function Container(containerProps){
     function helperRender(componentProps, Component){
@@ -21,6 +22,8 @@ function Container(containerProps){
                 render={(props)=>(helperRender(props,CreateRecipe))} />
             <Route path="/deleteRecipe/:id"
                 render={(props)=>(helperRender(props,DeleteRecipe))} />
+            <Route path="/recipe/:id"
+                render={(props)=>(helperRender(props,Recipe))} />
         </div>
     )
 };

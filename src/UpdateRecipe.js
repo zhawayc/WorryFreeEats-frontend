@@ -14,6 +14,7 @@ class UpdateRecipe extends React.Component{
     }
 
     componentDidMount(){
+        console.log(this.props.recipeState);
         const recipe = this.props.recipeState.get(this.id);
         this.setState({
             RecipeName: recipe.RecipeName,
