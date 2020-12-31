@@ -9,10 +9,6 @@ class Recipes extends React.Component{
         this.props.onGetList(this.props.recipes);
     }
 
-    handleClick(id){
-        this.props.history.push(`recipe/${id}`)
-    }
-
     getAllergies(ingredients){
         let allergies = new Set();
         for(let ingredient of ingredients){
@@ -29,14 +25,14 @@ class Recipes extends React.Component{
 
     render(){
         const list_recipes = this.props.recipes.map(recipe=>{
-            console.log(recipe.Ingredients);
             const ingredients = recipe.Ingredients.map(i=><div>{i.Name}</div>)
             return (
                 <tr>
                     <td>{recipe.RecipeID}</td>
                     <td><img src={recipe.ImageUrl} alt="not found" width="200px" height="180px" /></td>
-                    <td onClick={()=>{this.handleClick(recipe.RecipeID)}}>
+                    <td><Link {...this.props} to={`/recipe/${recipe.RecipeID}`}>
                         {recipe.RecipeName}
+                        </Link>
                     </td>
                     <td>{this.getAllergies(recipe.Ingredients)}</td>
                     <td>{ingredients}</td>

@@ -21,7 +21,16 @@ export type RecipeQueryResponse = {|
       +Name: ?string,
       +AllergyType: ?string,
     |}>,
-  |}
+  |},
+  +reviewsByRecipeId: ?$ReadOnlyArray<?{|
+    +ReviewId: string,
+    +ReviewText: ?string,
+    +Rating: ?number,
+    +User: ?{|
+      +UserId: string,
+      +UserName: ?string,
+    |},
+  |}>,
 |};
 export type RecipeQuery = {|
   variables: RecipeQueryVariables,
@@ -44,6 +53,15 @@ query RecipeQuery(
       AllergyType
     }
   }
+  reviewsByRecipeId(id: $id) {
+    ReviewId
+    ReviewText
+    Rating
+    User {
+      UserId
+      UserName
+    }
+  }
 }
 */
 
@@ -57,14 +75,15 @@ var v0 = [
 ],
 v1 = [
   {
+    "kind": "Variable",
+    "name": "id",
+    "variableName": "id"
+  }
+],
+v2 = [
+  {
     "alias": null,
-    "args": [
-      {
-        "kind": "Variable",
-        "name": "id",
-        "variableName": "id"
-      }
-    ],
+    "args": (v1/*: any*/),
     "concreteType": "Recipe",
     "kind": "LinkedField",
     "name": "recipe",
@@ -125,6 +144,63 @@ v1 = [
       }
     ],
     "storageKey": null
+  },
+  {
+    "alias": null,
+    "args": (v1/*: any*/),
+    "concreteType": "Review",
+    "kind": "LinkedField",
+    "name": "reviewsByRecipeId",
+    "plural": true,
+    "selections": [
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "ReviewId",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "ReviewText",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "Rating",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "concreteType": "User",
+        "kind": "LinkedField",
+        "name": "User",
+        "plural": false,
+        "selections": [
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "UserId",
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "UserName",
+            "storageKey": null
+          }
+        ],
+        "storageKey": null
+      }
+    ],
+    "storageKey": null
   }
 ];
 return {
@@ -133,7 +209,7 @@ return {
     "kind": "Fragment",
     "metadata": null,
     "name": "RecipeQuery",
-    "selections": (v1/*: any*/),
+    "selections": (v2/*: any*/),
     "type": "Query",
     "abstractKey": null
   },
@@ -142,19 +218,19 @@ return {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
     "name": "RecipeQuery",
-    "selections": (v1/*: any*/)
+    "selections": (v2/*: any*/)
   },
   "params": {
-    "cacheID": "31b3bc82e397e4151e514c04fbbe4e11",
+    "cacheID": "7a979390545c479cfa41e66af5fb50ce",
     "id": null,
     "metadata": {},
     "name": "RecipeQuery",
     "operationKind": "query",
-    "text": "query RecipeQuery(\n  $id: ID!\n) {\n  recipe(id: $id) {\n    RecipeID\n    RecipeName\n    ImageUrl\n    Ingredients {\n      IngredientId\n      Name\n      AllergyType\n    }\n  }\n}\n"
+    "text": "query RecipeQuery(\n  $id: ID!\n) {\n  recipe(id: $id) {\n    RecipeID\n    RecipeName\n    ImageUrl\n    Ingredients {\n      IngredientId\n      Name\n      AllergyType\n    }\n  }\n  reviewsByRecipeId(id: $id) {\n    ReviewId\n    ReviewText\n    Rating\n    User {\n      UserId\n      UserName\n    }\n  }\n}\n"
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '00d5f58bcac020d2168206d5c2f54cfa';
+(node/*: any*/).hash = '317036315f8cb12960bc35f901a785f6';
 
 module.exports = node;

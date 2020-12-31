@@ -23,7 +23,6 @@ class RecipeStore extends ReduceStore{
                         "ImageUrl": act.ImageUrl
                     });
                 }
-                console.log(newState);
                 return newState;
             default:
                 return state;

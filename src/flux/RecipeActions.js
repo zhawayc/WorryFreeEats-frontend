@@ -2,28 +2,16 @@ import RecipeDispatcher from "./RecipeDispatcher";
 import RecipeActionTypes from "./RecipeActionTypes";
 
 const Actions = {
-    addRecipe(recipe){
-        RecipeDispatcher.dispatch({
-            type: RecipeActionTypes.ADD_RECIPE,
-            recipe
-        })
-    },
     getList(recipes){
         RecipeDispatcher.dispatch({
             type: RecipeActionTypes.GET_LIST,
             recipes
         })
     },
-    updateRecipe(recipe){
+    getReviews(reviews){
         RecipeDispatcher.dispatch({
-            type: RecipeActionTypes.UPDATE_RECIPE,
-            recipe
-        })
-    },
-    deleteRecipe(recipe){
-        RecipeDispatcher.dispatch({
-            type: RecipeActionTypes.DELETE_RECIPE,
-            recipe
+            type: RecipeActionTypes.GET_REIVEWS,
+            reviews
         })
     }
 };
