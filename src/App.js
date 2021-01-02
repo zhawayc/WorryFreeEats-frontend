@@ -17,9 +17,10 @@ function App(props) {
           RecipeName
         }
 
-        recipes {
-          ...Recipes_recipes
-        }
+        #recipes {
+         # ...Recipes_recipes
+        #}
+        ...Recipes_query
 
         ingredient(id: $ingredientId){
           IngredientId
@@ -42,7 +43,7 @@ function App(props) {
         }
         return(
           <div>
-            <Recipes {...getProps()} recipes={props.recipes}/>
+            <Recipes {...getProps()} query={props}/>
             <div>Ingredient ID: {props.ingredient.Name}</div>
           </div>
         );

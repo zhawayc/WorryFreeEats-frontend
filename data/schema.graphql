@@ -11,14 +11,49 @@ type Recipe{
     Ingredients: [Ingredient]
 }
 
+type User{
+    UserId: ID!
+    UserName: String
+    UserPass: String
+    FirstName: String
+    Email: String
+}
+
+type Review{
+    ReviewId: ID!
+    ReviewText: String
+    RecipeID: ID
+    Rating: Int 
+    User: User
+}
+
+type PageInfo{
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: ID
+    endCursor: ID
+}
+
+type RecipeEdge{
+    node: Recipe
+    cursor: ID
+}
+
+type RecipeConnection{
+    pageInfo: PageInfo
+    edges: [RecipeEdge]
+}
+
 type Query{
     recipe(id: ID!): Recipe
-    recipes: [Recipe]
+    recipes(first: Int, after: ID): RecipeConnection
     ingredient(id: ID!): Ingredient
+    reviewsByRecipeId(id: ID!): [Review]
 }
 
 type Mutation{
     addRecipe(RecipeName: String, ImageUrl: String): Recipe
     updateRecipe(RecipeID: ID!, RecipeName: String, ImageUrl: String): Recipe
     deleteRecipe(RecipeID: ID!): Int
+    updateReview(ReviewId: ID!, ReviewText: String, RecipeID: ID, Rating: Int, UserId: ID): Review
 }

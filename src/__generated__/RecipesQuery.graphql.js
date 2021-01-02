@@ -9,46 +9,30 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 import type { Recipes_query$ref } from "./Recipes_query.graphql";
-export type AppQueryVariables = {|
-  id: string,
-  ingredientId: string,
+export type RecipesQueryVariables = {|
+  count?: ?number,
+  cursor?: ?string,
 |};
-export type AppQueryResponse = {|
-  +recipe: ?{|
-    +RecipeID: string,
-    +RecipeName: ?string,
-  |},
-  +ingredient: ?{|
-    +IngredientId: string,
-    +Name: ?string,
-  |},
-  +$fragmentRefs: Recipes_query$ref,
+export type RecipesQueryResponse = {|
+  +$fragmentRefs: Recipes_query$ref
 |};
-export type AppQuery = {|
-  variables: AppQueryVariables,
-  response: AppQueryResponse,
+export type RecipesQuery = {|
+  variables: RecipesQueryVariables,
+  response: RecipesQueryResponse,
 |};
 */
 
 
 /*
-query AppQuery(
-  $id: ID!
-  $ingredientId: ID!
+query RecipesQuery(
+  $count: Int
+  $cursor: ID
 ) {
-  recipe(id: $id) {
-    RecipeID
-    RecipeName
-  }
-  ...Recipes_query
-  ingredient(id: $ingredientId) {
-    IngredientId
-    Name
-  }
+  ...Recipes_query_1G22uz
 }
 
-fragment Recipes_query on Query {
-  recipes(first: 10, after: 2) {
+fragment Recipes_query_1G22uz on Query {
+  recipes(first: $count, after: $cursor) {
     edges {
       node {
         RecipeID
@@ -76,90 +60,24 @@ var v0 = [
   {
     "defaultValue": null,
     "kind": "LocalArgument",
-    "name": "id"
+    "name": "count"
   },
   {
     "defaultValue": null,
     "kind": "LocalArgument",
-    "name": "ingredientId"
+    "name": "cursor"
   }
 ],
-v1 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "RecipeID",
-  "storageKey": null
-},
-v2 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "RecipeName",
-  "storageKey": null
-},
-v3 = {
-  "alias": null,
-  "args": [
-    {
-      "kind": "Variable",
-      "name": "id",
-      "variableName": "id"
-    }
-  ],
-  "concreteType": "Recipe",
-  "kind": "LinkedField",
-  "name": "recipe",
-  "plural": false,
-  "selections": [
-    (v1/*: any*/),
-    (v2/*: any*/)
-  ],
-  "storageKey": null
-},
-v4 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "IngredientId",
-  "storageKey": null
-},
-v5 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "Name",
-  "storageKey": null
-},
-v6 = {
-  "alias": null,
-  "args": [
-    {
-      "kind": "Variable",
-      "name": "id",
-      "variableName": "ingredientId"
-    }
-  ],
-  "concreteType": "Ingredient",
-  "kind": "LinkedField",
-  "name": "ingredient",
-  "plural": false,
-  "selections": [
-    (v4/*: any*/),
-    (v5/*: any*/)
-  ],
-  "storageKey": null
-},
-v7 = [
+v1 = [
   {
-    "kind": "Literal",
+    "kind": "Variable",
     "name": "after",
-    "value": 2
+    "variableName": "cursor"
   },
   {
-    "kind": "Literal",
+    "kind": "Variable",
     "name": "first",
-    "value": 10
+    "variableName": "count"
   }
 ];
 return {
@@ -167,12 +85,21 @@ return {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
-    "name": "AppQuery",
+    "name": "RecipesQuery",
     "selections": [
-      (v3/*: any*/),
-      (v6/*: any*/),
       {
-        "args": null,
+        "args": [
+          {
+            "kind": "Variable",
+            "name": "count",
+            "variableName": "count"
+          },
+          {
+            "kind": "Variable",
+            "name": "cursor",
+            "variableName": "cursor"
+          }
+        ],
         "kind": "FragmentSpread",
         "name": "Recipes_query"
       }
@@ -184,12 +111,11 @@ return {
   "operation": {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
-    "name": "AppQuery",
+    "name": "RecipesQuery",
     "selections": [
-      (v3/*: any*/),
       {
         "alias": null,
-        "args": (v7/*: any*/),
+        "args": (v1/*: any*/),
         "concreteType": "RecipeConnection",
         "kind": "LinkedField",
         "name": "recipes",
@@ -211,8 +137,20 @@ return {
                 "name": "node",
                 "plural": false,
                 "selections": [
-                  (v1/*: any*/),
-                  (v2/*: any*/),
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "RecipeID",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "RecipeName",
+                    "storageKey": null
+                  },
                   {
                     "alias": null,
                     "args": null,
@@ -228,8 +166,20 @@ return {
                     "name": "Ingredients",
                     "plural": true,
                     "selections": [
-                      (v4/*: any*/),
-                      (v5/*: any*/),
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "IngredientId",
+                        "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "Name",
+                        "storageKey": null
+                      },
                       {
                         "alias": null,
                         "args": null,
@@ -286,31 +236,30 @@ return {
             "storageKey": null
           }
         ],
-        "storageKey": "recipes(after:2,first:10)"
+        "storageKey": null
       },
       {
         "alias": null,
-        "args": (v7/*: any*/),
+        "args": (v1/*: any*/),
         "filters": null,
         "handle": "connection",
         "key": "Recipes_recipes",
         "kind": "LinkedHandle",
         "name": "recipes"
-      },
-      (v6/*: any*/)
+      }
     ]
   },
   "params": {
-    "cacheID": "07fa694b6a440360b92f9bb64979d526",
+    "cacheID": "2bf521fb81b76dac0b2da5b0039a5d14",
     "id": null,
     "metadata": {},
-    "name": "AppQuery",
+    "name": "RecipesQuery",
     "operationKind": "query",
-    "text": "query AppQuery(\n  $id: ID!\n  $ingredientId: ID!\n) {\n  recipe(id: $id) {\n    RecipeID\n    RecipeName\n  }\n  ...Recipes_query\n  ingredient(id: $ingredientId) {\n    IngredientId\n    Name\n  }\n}\n\nfragment Recipes_query on Query {\n  recipes(first: 10, after: 2) {\n    edges {\n      node {\n        RecipeID\n        RecipeName\n        ImageUrl\n        Ingredients {\n          IngredientId\n          Name\n          AllergyType\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n"
+    "text": "query RecipesQuery(\n  $count: Int\n  $cursor: ID\n) {\n  ...Recipes_query_1G22uz\n}\n\nfragment Recipes_query_1G22uz on Query {\n  recipes(first: $count, after: $cursor) {\n    edges {\n      node {\n        RecipeID\n        RecipeName\n        ImageUrl\n        Ingredients {\n          IngredientId\n          Name\n          AllergyType\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n"
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '4c411ba6f597c75c8faa258b1b2c9cae';
+(node/*: any*/).hash = 'd4423c0a3c1c2d705803705cf8ce6658';
 
 module.exports = node;
