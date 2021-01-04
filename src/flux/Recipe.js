@@ -1,7 +1,7 @@
 import Immutable from "immutable";
 
 const Recipe = Immutable.Record({
-    RecipeID: "",
+    id: "",
     RecipeName: "",
     ImageUrl: ""
 });

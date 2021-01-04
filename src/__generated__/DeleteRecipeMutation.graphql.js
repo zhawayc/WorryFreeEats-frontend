@@ -9,7 +9,7 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 export type DeleteRecipeMutationVariables = {|
-  RecipeID: string
+  id: string
 |};
 export type DeleteRecipeMutationResponse = {|
   +deleteRecipe: ?number
@@ -23,9 +23,9 @@ export type DeleteRecipeMutation = {|
 
 /*
 mutation DeleteRecipeMutation(
-  $RecipeID: ID!
+  $id: ID!
 ) {
-  deleteRecipe(RecipeID: $RecipeID)
+  deleteRecipe(id: $id)
 }
 */
 
@@ -34,7 +34,7 @@ var v0 = [
   {
     "defaultValue": null,
     "kind": "LocalArgument",
-    "name": "RecipeID"
+    "name": "id"
   }
 ],
 v1 = [
@@ -43,8 +43,8 @@ v1 = [
     "args": [
       {
         "kind": "Variable",
-        "name": "RecipeID",
-        "variableName": "RecipeID"
+        "name": "id",
+        "variableName": "id"
       }
     ],
     "kind": "ScalarField",
@@ -70,16 +70,16 @@ return {
     "selections": (v1/*: any*/)
   },
   "params": {
-    "cacheID": "16151b3fdc0da145393d1e0a57eaba89",
+    "cacheID": "6ea8b3216b34b56aa257c6f264d082ae",
     "id": null,
     "metadata": {},
     "name": "DeleteRecipeMutation",
     "operationKind": "mutation",
-    "text": "mutation DeleteRecipeMutation(\n  $RecipeID: ID!\n) {\n  deleteRecipe(RecipeID: $RecipeID)\n}\n"
+    "text": "mutation DeleteRecipeMutation(\n  $id: ID!\n) {\n  deleteRecipe(id: $id)\n}\n"
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'cd7035b7abd0750ce1def8421c443d09';
+(node/*: any*/).hash = 'e3367af1ecfc27ab5e5be5858d6c5333';
 
 module.exports = node;

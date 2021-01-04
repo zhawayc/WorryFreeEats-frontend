@@ -1,45 +1,39 @@
 import React from "react";
 import { createPaginationContainer, graphql } from "react-relay";
 import { Link } from "react-router-dom";
+import Ingredients from "./Ingredients";
 
 class Recipes extends React.Component{
 
     componentDidMount(){
-        console.log(this.props);
         this.props.onGetList(this.props.query.recipes.edges.map(edge=>edge.node));
     }
 
-    getAllergies(ingredients){
-        let allergies = new Set();
-        for(let ingredient of ingredients){
-            if(ingredient.AllergyType=="NotAllergy"){
-                continue;
+    _loadMore(){
+        this.props.relay.loadMore(
+            5,
+            error=>{
+                console.log(error);
             }
-            allergies.add(ingredient.AllergyType);
-        }
-        let arr = new Array(...allergies);
-        return arr.map(allergy=>(
-            <div>{allergy}</div>
-        ))
+        )
     }
 
     render(){
-        console.log(this.props);
         const list_recipes = this.props.query.recipes.edges.map(edge=>{
             const recipe = edge.node;
-            const ingredients = recipe.Ingredients.map(i=><div>{i.Name}</div>)
             return (
-                <tr>
-                    <td>{recipe.RecipeID}</td>
+                <tr key={recipe.id}>
+                    <td>{recipe.id}</td>
                     <td><img src={recipe.ImageUrl} alt="not found" width="200px" height="180px" /></td>
-                    <td><Link {...this.props} to={`/recipe/${recipe.RecipeID}`}>
+                    <td><Link {...this.props} to={`/recipe/${recipe.id}`}>
                         {recipe.RecipeName}
                         </Link>
                     </td>
-                    <td>{this.getAllergies(recipe.Ingredients)}</td>
-                    <td>{ingredients}</td>
-                    <td><Link to={`/updateRecipe/${recipe.RecipeID}`}>Update</Link></td>
-                    <td><Link to={`/deleteRecipe/${recipe.RecipeID}`}>Delete</Link></td>
+                    
+                    <td>{"hello world"}</td>
+                    <td><Ingredients recipe = {recipe}/></td>
+                    <td><Link to={`/updateRecipe/${recipe.id}`}>Update</Link></td>
+                    <td><Link to={`/deleteRecipe/${recipe.id}`}>Delete</Link></td>
                 </tr>
             );
         })
@@ -63,6 +57,7 @@ class Recipes extends React.Component{
                         {list_recipes}
                     </tbody>
                 </table>
+                <button onClick={()=>this._loadMore()}>Load more</button>
             </div>
         )
     }
@@ -71,7 +66,7 @@ class Recipes extends React.Component{
 /*
 export default createFragmentContainer(Recipes, {recipes: graphql`
     fragment Recipes_recipes on Recipe@relay(plural:true) {
-        RecipeID,
+        id,
         RecipeName,
         ImageUrl,
         Ingredients{
@@ -89,23 +84,19 @@ export default createPaginationContainer(
         query: graphql`
             fragment Recipes_query on Query
             @argumentDefinitions(
-                count: {type: "Int", defaultValue:10}
-                cursor: {type: "ID", defaultValue: 2}
+                count: {type: "Int", defaultValue: 5}
+                cursor: {type: "ID", defaultValue: 0}
             ){
                 recipes(
                     first:$count,
                     after:$cursor
-                ) @connection(key: "Recipes_recipes"){
+                ) @connection(key: "Recipes_recipes", filters: []){
                     edges{
                         node{
-                            RecipeID
+                            id
                             RecipeName
                             ImageUrl
-                            Ingredients{
-                                IngredientId
-                                Name
-                                AllergyType
-                            }
+                            ...Ingredients_recipe
                         }
                     }
                 }

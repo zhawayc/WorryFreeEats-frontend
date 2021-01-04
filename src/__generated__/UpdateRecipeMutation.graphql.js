@@ -9,13 +9,13 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 export type UpdateRecipeMutationVariables = {|
-  RecipeID: string,
+  id: string,
   RecipeName?: ?string,
   ImageUrl?: ?string,
 |};
 export type UpdateRecipeMutationResponse = {|
   +updateRecipe: ?{|
-    +RecipeID: string,
+    +id: string,
     +RecipeName: ?string,
     +ImageUrl: ?string,
   |}
@@ -29,12 +29,12 @@ export type UpdateRecipeMutation = {|
 
 /*
 mutation UpdateRecipeMutation(
-  $RecipeID: ID!
+  $id: ID!
   $RecipeName: String
   $ImageUrl: String
 ) {
-  updateRecipe(RecipeID: $RecipeID, RecipeName: $RecipeName, ImageUrl: $ImageUrl) {
-    RecipeID
+  updateRecipe(id: $id, RecipeName: $RecipeName, ImageUrl: $ImageUrl) {
+    id
     RecipeName
     ImageUrl
   }
@@ -50,12 +50,12 @@ var v0 = {
 v1 = {
   "defaultValue": null,
   "kind": "LocalArgument",
-  "name": "RecipeID"
+  "name": "RecipeName"
 },
 v2 = {
   "defaultValue": null,
   "kind": "LocalArgument",
-  "name": "RecipeName"
+  "name": "id"
 },
 v3 = [
   {
@@ -68,13 +68,13 @@ v3 = [
       },
       {
         "kind": "Variable",
-        "name": "RecipeID",
-        "variableName": "RecipeID"
+        "name": "RecipeName",
+        "variableName": "RecipeName"
       },
       {
         "kind": "Variable",
-        "name": "RecipeName",
-        "variableName": "RecipeName"
+        "name": "id",
+        "variableName": "id"
       }
     ],
     "concreteType": "Recipe",
@@ -86,7 +86,7 @@ v3 = [
         "alias": null,
         "args": null,
         "kind": "ScalarField",
-        "name": "RecipeID",
+        "name": "id",
         "storageKey": null
       },
       {
@@ -124,8 +124,8 @@ return {
   "kind": "Request",
   "operation": {
     "argumentDefinitions": [
-      (v1/*: any*/),
       (v2/*: any*/),
+      (v1/*: any*/),
       (v0/*: any*/)
     ],
     "kind": "Operation",
@@ -133,16 +133,16 @@ return {
     "selections": (v3/*: any*/)
   },
   "params": {
-    "cacheID": "150f0238b4b9b66d9202d6762959925e",
+    "cacheID": "209e3f5940b896c1a6f99564daaa3e55",
     "id": null,
     "metadata": {},
     "name": "UpdateRecipeMutation",
     "operationKind": "mutation",
-    "text": "mutation UpdateRecipeMutation(\n  $RecipeID: ID!\n  $RecipeName: String\n  $ImageUrl: String\n) {\n  updateRecipe(RecipeID: $RecipeID, RecipeName: $RecipeName, ImageUrl: $ImageUrl) {\n    RecipeID\n    RecipeName\n    ImageUrl\n  }\n}\n"
+    "text": "mutation UpdateRecipeMutation(\n  $id: ID!\n  $RecipeName: String\n  $ImageUrl: String\n) {\n  updateRecipe(id: $id, RecipeName: $RecipeName, ImageUrl: $ImageUrl) {\n    id\n    RecipeName\n    ImageUrl\n  }\n}\n"
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'cd859f7cbb767121ae72aaaddd3c305c';
+(node/*: any*/).hash = '10552d72d6539cc12b67c2cc619ccd83';
 
 module.exports = node;

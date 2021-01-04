@@ -14,10 +14,10 @@ class Recipe extends React.Component{
     }
 
     renderDetails(props){
-        return props.recipe.Ingredients.map(ingredient=>{
+        return props.recipe.Ingredients.edges.map(ingredient=>{
             return (<tr>
-                <td>{ingredient.Name}</td>
-                <td>{ingredient.AllergyType}</td>
+                <td>{ingredient.node.Name}</td>
+                <td>{ingredient.node.AllergyType}</td>
             </tr>);
         });
     }
@@ -42,13 +42,18 @@ class Recipe extends React.Component{
                 query={graphql`
                     query RecipeQuery($id: ID!){
                         recipe(id: $id){
-                            RecipeID
+                            id
                             RecipeName
                             ImageUrl
-                            Ingredients{
-                                IngredientId
-                                Name
-                                AllergyType
+                            Ingredients(first: 10, after: 0){
+                                edges{
+                                    node{
+                                        id
+                                        Name
+                                        AllergyType
+                                    }
+                                }
+
                             }
                         }
                         reviewsByRecipeId(id: $id){

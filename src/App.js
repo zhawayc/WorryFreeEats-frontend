@@ -13,8 +13,7 @@ function App(props) {
   const appQuery = graphql`
     query AppQuery($id: ID!, $ingredientId: ID!) {
         recipe(id: $id) {
-          RecipeID
-          RecipeName
+          ...Ingredients_recipe
         }
 
         #recipes {
@@ -23,7 +22,7 @@ function App(props) {
         ...Recipes_query
 
         ingredient(id: $ingredientId){
-          IngredientId
+          id
           Name
         }
       }

@@ -1,9 +1,9 @@
 import {graphql, commitMutation} from "react-relay";
 
 const mutation = graphql`
-    mutation UpdateRecipeMutation($RecipeID: ID!, $RecipeName: String, $ImageUrl: String){
-        updateRecipe(RecipeID: $RecipeID, RecipeName: $RecipeName, ImageUrl: $ImageUrl){
-            RecipeID
+    mutation UpdateRecipeMutation($id: ID!, $RecipeName: String, $ImageUrl: String){
+        updateRecipe(id: $id, RecipeName: $RecipeName, ImageUrl: $ImageUrl){
+            id
             RecipeName
             ImageUrl
         }
@@ -12,7 +12,7 @@ const mutation = graphql`
 
 function updateRecipe(
     environment,
-    RecipeID,
+    id,
     RecipeName,
     ImageUrl
 ){
@@ -21,7 +21,7 @@ function updateRecipe(
         {
             mutation,
             variables:{
-                RecipeID,
+                id,
                 RecipeName,
                 ImageUrl
             }

@@ -17,8 +17,8 @@ class RecipeStore extends ReduceStore{
             case RecipeActionTypes.GET_LIST:
                 let newState = state;
                 for(let act of action.recipes){
-                    newState = newState.set(act.RecipeID, {
-                        "RecipeID": act.RecipeID, 
+                    newState = newState.set(act.id, {
+                        "id": act.id, 
                         "RecipeName": act.RecipeName, 
                         "ImageUrl": act.ImageUrl
                     });

@@ -8,36 +8,46 @@
 
 /*::
 import type { ReaderFragment } from 'relay-runtime';
-import type { Ingredients_recipe$ref } from "./Ingredients_recipe.graphql";
 import type { FragmentReference } from "relay-runtime";
-declare export opaque type Recipes_query$ref: FragmentReference;
-declare export opaque type Recipes_query$fragmentType: Recipes_query$ref;
-export type Recipes_query = {|
-  +recipes: ?{|
+declare export opaque type Ingredients_recipe$ref: FragmentReference;
+declare export opaque type Ingredients_recipe$fragmentType: Ingredients_recipe$ref;
+export type Ingredients_recipe = {|
+  +id: string,
+  +Ingredients: ?{|
+    +pageInfo: ?{|
+      +endCursor: ?string
+    |},
     +edges: ?$ReadOnlyArray<?{|
       +node: ?{|
         +id: string,
-        +RecipeName: ?string,
-        +ImageUrl: ?string,
-        +$fragmentRefs: Ingredients_recipe$ref,
+        +Name: ?string,
+        +AllergyType: ?string,
       |}
-    |}>
+    |}>,
   |},
-  +$refType: Recipes_query$ref,
+  +$refType: Ingredients_recipe$ref,
 |};
-export type Recipes_query$data = Recipes_query;
-export type Recipes_query$key = {
-  +$data?: Recipes_query$data,
-  +$fragmentRefs: Recipes_query$ref,
+export type Ingredients_recipe$data = Ingredients_recipe;
+export type Ingredients_recipe$key = {
+  +$data?: Ingredients_recipe$data,
+  +$fragmentRefs: Ingredients_recipe$ref,
   ...
 };
 */
 
 
-const node/*: ReaderFragment*/ = {
+const node/*: ReaderFragment*/ = (function(){
+var v0 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "id",
+  "storageKey": null
+};
+return {
   "argumentDefinitions": [
     {
-      "defaultValue": 5,
+      "defaultValue": 4,
       "kind": "LocalArgument",
       "name": "count"
     },
@@ -55,83 +65,22 @@ const node/*: ReaderFragment*/ = {
         "cursor": "cursor",
         "direction": "forward",
         "path": [
-          "recipes"
+          "Ingredients"
         ]
       }
     ]
   },
-  "name": "Recipes_query",
+  "name": "Ingredients_recipe",
   "selections": [
+    (v0/*: any*/),
     {
-      "alias": "recipes",
+      "alias": "Ingredients",
       "args": null,
-      "concreteType": "RecipeConnection",
+      "concreteType": "IngredientConnection",
       "kind": "LinkedField",
-      "name": "__Recipes_recipes_connection",
+      "name": "__Ingredients_Ingredients_connection",
       "plural": false,
       "selections": [
-        {
-          "alias": null,
-          "args": null,
-          "concreteType": "RecipeEdge",
-          "kind": "LinkedField",
-          "name": "edges",
-          "plural": true,
-          "selections": [
-            {
-              "alias": null,
-              "args": null,
-              "concreteType": "Recipe",
-              "kind": "LinkedField",
-              "name": "node",
-              "plural": false,
-              "selections": [
-                {
-                  "alias": null,
-                  "args": null,
-                  "kind": "ScalarField",
-                  "name": "id",
-                  "storageKey": null
-                },
-                {
-                  "alias": null,
-                  "args": null,
-                  "kind": "ScalarField",
-                  "name": "RecipeName",
-                  "storageKey": null
-                },
-                {
-                  "alias": null,
-                  "args": null,
-                  "kind": "ScalarField",
-                  "name": "ImageUrl",
-                  "storageKey": null
-                },
-                {
-                  "alias": null,
-                  "args": null,
-                  "kind": "ScalarField",
-                  "name": "__typename",
-                  "storageKey": null
-                },
-                {
-                  "args": null,
-                  "kind": "FragmentSpread",
-                  "name": "Ingredients_recipe"
-                }
-              ],
-              "storageKey": null
-            },
-            {
-              "alias": null,
-              "args": null,
-              "kind": "ScalarField",
-              "name": "cursor",
-              "storageKey": null
-            }
-          ],
-          "storageKey": null
-        },
         {
           "alias": null,
           "args": null,
@@ -156,15 +105,67 @@ const node/*: ReaderFragment*/ = {
             }
           ],
           "storageKey": null
+        },
+        {
+          "alias": null,
+          "args": null,
+          "concreteType": "IngredientEdge",
+          "kind": "LinkedField",
+          "name": "edges",
+          "plural": true,
+          "selections": [
+            {
+              "alias": null,
+              "args": null,
+              "concreteType": "Ingredient",
+              "kind": "LinkedField",
+              "name": "node",
+              "plural": false,
+              "selections": [
+                (v0/*: any*/),
+                {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "Name",
+                  "storageKey": null
+                },
+                {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "AllergyType",
+                  "storageKey": null
+                },
+                {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "__typename",
+                  "storageKey": null
+                }
+              ],
+              "storageKey": null
+            },
+            {
+              "alias": null,
+              "args": null,
+              "kind": "ScalarField",
+              "name": "cursor",
+              "storageKey": null
+            }
+          ],
+          "storageKey": null
         }
       ],
       "storageKey": null
     }
   ],
-  "type": "Query",
+  "type": "Recipe",
   "abstractKey": null
 };
+})();
 // prettier-ignore
-(node/*: any*/).hash = '818b2ebd60fb58d8fbf537eb9d3c6912';
+(node/*: any*/).hash = '90966359b355a55973ebeac5bfb61dc4';
 
 module.exports = node;

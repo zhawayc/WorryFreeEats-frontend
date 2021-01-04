@@ -1,21 +1,21 @@
 import {graphql, commitMutation} from "react-relay";
 
 const mutation = graphql`
-    mutation DeleteRecipeMutation($RecipeID: ID!){
-        deleteRecipe(RecipeID: $RecipeID)
+    mutation DeleteRecipeMutation($id: ID!){
+        deleteRecipe(id: $id)
     }
 `;
 
 function deleteRecipe(
     environment,
-    RecipeID,
+    id,
 ){
     return commitMutation(
         environment,
         {
             mutation,
             variables:{
-                RecipeID
+                id
             }
         }
     );

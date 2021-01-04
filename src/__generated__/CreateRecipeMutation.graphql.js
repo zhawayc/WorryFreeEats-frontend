@@ -14,7 +14,7 @@ export type CreateRecipeMutationVariables = {|
 |};
 export type CreateRecipeMutationResponse = {|
   +addRecipe: ?{|
-    +RecipeID: string,
+    +id: string,
     +RecipeName: ?string,
     +ImageUrl: ?string,
   |}
@@ -32,7 +32,7 @@ mutation CreateRecipeMutation(
   $ImageUrl: String
 ) {
   addRecipe(RecipeName: $RecipeName, ImageUrl: $ImageUrl) {
-    RecipeID
+    id
     RecipeName
     ImageUrl
   }
@@ -74,7 +74,7 @@ v2 = [
         "alias": null,
         "args": null,
         "kind": "ScalarField",
-        "name": "RecipeID",
+        "name": "id",
         "storageKey": null
       },
       {
@@ -119,16 +119,16 @@ return {
     "selections": (v2/*: any*/)
   },
   "params": {
-    "cacheID": "96c2ab2f48157ae372de5afd2ec5f6c7",
+    "cacheID": "b255acc56e392973faa0408c8422842d",
     "id": null,
     "metadata": {},
     "name": "CreateRecipeMutation",
     "operationKind": "mutation",
-    "text": "mutation CreateRecipeMutation(\n  $RecipeName: String!\n  $ImageUrl: String\n) {\n  addRecipe(RecipeName: $RecipeName, ImageUrl: $ImageUrl) {\n    RecipeID\n    RecipeName\n    ImageUrl\n  }\n}\n"
+    "text": "mutation CreateRecipeMutation(\n  $RecipeName: String!\n  $ImageUrl: String\n) {\n  addRecipe(RecipeName: $RecipeName, ImageUrl: $ImageUrl) {\n    id\n    RecipeName\n    ImageUrl\n  }\n}\n"
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '1cb6a0a8d8d48ab59172ea8f26dae641';
+(node/*: any*/).hash = '35a6070ceffe986dbd8d996edc1bf2e1';
 
 module.exports = node;

@@ -31,18 +31,33 @@ query RecipesQuery(
   ...Recipes_query_1G22uz
 }
 
+fragment Ingredients_recipe on Recipe {
+  id
+  Ingredients(first: 4, after: 0) {
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+    edges {
+      node {
+        id
+        Name
+        AllergyType
+        __typename
+      }
+      cursor
+    }
+  }
+}
+
 fragment Recipes_query_1G22uz on Query {
   recipes(first: $count, after: $cursor) {
     edges {
       node {
-        RecipeID
+        id
         RecipeName
         ImageUrl
-        Ingredients {
-          IngredientId
-          Name
-          AllergyType
-        }
+        ...Ingredients_recipe
         __typename
       }
       cursor
@@ -79,7 +94,65 @@ v1 = [
     "name": "first",
     "variableName": "count"
   }
-];
+],
+v2 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "id",
+  "storageKey": null
+},
+v3 = [
+  {
+    "kind": "Literal",
+    "name": "after",
+    "value": 0
+  },
+  {
+    "kind": "Literal",
+    "name": "first",
+    "value": 4
+  }
+],
+v4 = {
+  "alias": null,
+  "args": null,
+  "concreteType": "PageInfo",
+  "kind": "LinkedField",
+  "name": "pageInfo",
+  "plural": false,
+  "selections": [
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "endCursor",
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "hasNextPage",
+      "storageKey": null
+    }
+  ],
+  "storageKey": null
+},
+v5 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "__typename",
+  "storageKey": null
+},
+v6 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "cursor",
+  "storageKey": null
+};
 return {
   "fragment": {
     "argumentDefinitions": (v0/*: any*/),
@@ -137,13 +210,7 @@ return {
                 "name": "node",
                 "plural": false,
                 "selections": [
-                  {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "RecipeID",
-                    "storageKey": null
-                  },
+                  (v2/*: any*/),
                   {
                     "alias": null,
                     "args": null,
@@ -160,88 +227,80 @@ return {
                   },
                   {
                     "alias": null,
-                    "args": null,
-                    "concreteType": "Ingredient",
+                    "args": (v3/*: any*/),
+                    "concreteType": "IngredientConnection",
                     "kind": "LinkedField",
                     "name": "Ingredients",
-                    "plural": true,
+                    "plural": false,
                     "selections": [
+                      (v4/*: any*/),
                       {
                         "alias": null,
                         "args": null,
-                        "kind": "ScalarField",
-                        "name": "IngredientId",
-                        "storageKey": null
-                      },
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "Name",
-                        "storageKey": null
-                      },
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "AllergyType",
+                        "concreteType": "IngredientEdge",
+                        "kind": "LinkedField",
+                        "name": "edges",
+                        "plural": true,
+                        "selections": [
+                          {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "Ingredient",
+                            "kind": "LinkedField",
+                            "name": "node",
+                            "plural": false,
+                            "selections": [
+                              (v2/*: any*/),
+                              {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "Name",
+                                "storageKey": null
+                              },
+                              {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "AllergyType",
+                                "storageKey": null
+                              },
+                              (v5/*: any*/)
+                            ],
+                            "storageKey": null
+                          },
+                          (v6/*: any*/)
+                        ],
                         "storageKey": null
                       }
                     ],
-                    "storageKey": null
+                    "storageKey": "Ingredients(after:0,first:4)"
                   },
                   {
                     "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "__typename",
-                    "storageKey": null
-                  }
+                    "args": (v3/*: any*/),
+                    "filters": [],
+                    "handle": "connection",
+                    "key": "Ingredients_Ingredients",
+                    "kind": "LinkedHandle",
+                    "name": "Ingredients"
+                  },
+                  (v5/*: any*/)
                 ],
                 "storageKey": null
               },
-              {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "cursor",
-                "storageKey": null
-              }
+              (v6/*: any*/)
             ],
             "storageKey": null
           },
-          {
-            "alias": null,
-            "args": null,
-            "concreteType": "PageInfo",
-            "kind": "LinkedField",
-            "name": "pageInfo",
-            "plural": false,
-            "selections": [
-              {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "endCursor",
-                "storageKey": null
-              },
-              {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "hasNextPage",
-                "storageKey": null
-              }
-            ],
-            "storageKey": null
-          }
+          (v4/*: any*/)
         ],
         "storageKey": null
       },
       {
         "alias": null,
         "args": (v1/*: any*/),
-        "filters": null,
+        "filters": [],
         "handle": "connection",
         "key": "Recipes_recipes",
         "kind": "LinkedHandle",
@@ -250,12 +309,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "2bf521fb81b76dac0b2da5b0039a5d14",
+    "cacheID": "0bc8ae8666b17e438dbd2263c4c6b386",
     "id": null,
     "metadata": {},
     "name": "RecipesQuery",
     "operationKind": "query",
-    "text": "query RecipesQuery(\n  $count: Int\n  $cursor: ID\n) {\n  ...Recipes_query_1G22uz\n}\n\nfragment Recipes_query_1G22uz on Query {\n  recipes(first: $count, after: $cursor) {\n    edges {\n      node {\n        RecipeID\n        RecipeName\n        ImageUrl\n        Ingredients {\n          IngredientId\n          Name\n          AllergyType\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n"
+    "text": "query RecipesQuery(\n  $count: Int\n  $cursor: ID\n) {\n  ...Recipes_query_1G22uz\n}\n\nfragment Ingredients_recipe on Recipe {\n  id\n  Ingredients(first: 4, after: 0) {\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n    edges {\n      node {\n        id\n        Name\n        AllergyType\n        __typename\n      }\n      cursor\n    }\n  }\n}\n\nfragment Recipes_query_1G22uz on Query {\n  recipes(first: $count, after: $cursor) {\n    edges {\n      node {\n        id\n        RecipeName\n        ImageUrl\n        ...Ingredients_recipe\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n"
   }
 };
 })();
