@@ -1,14 +1,31 @@
 type Ingredient{
-    IngredientId: ID!
+    id: ID!
     Name: String
     AllergyType: String
 }
 
+type IngredientEdge{
+    node: Ingredient
+    cursor: ID
+}
+
+type PageInfo{
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: ID
+    endCursor: ID
+}
+
+type IngredientConnection{
+    pageInfo: PageInfo
+    edges: [IngredientEdge]
+}
+
 type Recipe{
-    RecipeID: ID!
+    id: ID!
     RecipeName: String
     ImageUrl: String
-    Ingredients: [Ingredient]
+    Ingredients(first: Int, after: ID): IngredientConnection
 }
 
 type User{
@@ -27,13 +44,6 @@ type Review{
     User: User
 }
 
-type PageInfo{
-    hasNextPage: Boolean!
-    hasPreviousPage: Boolean!
-    startCursor: ID
-    endCursor: ID
-}
-
 type RecipeEdge{
     node: Recipe
     cursor: ID
@@ -49,11 +59,13 @@ type Query{
     recipes(first: Int, after: ID): RecipeConnection
     ingredient(id: ID!): Ingredient
     reviewsByRecipeId(id: ID!): [Review]
+    topRecipes: [Recipe]
+    topRecipesWithoutAllergy(allergy: String): [Recipe]
 }
 
 type Mutation{
     addRecipe(RecipeName: String, ImageUrl: String): Recipe
-    updateRecipe(RecipeID: ID!, RecipeName: String, ImageUrl: String): Recipe
-    deleteRecipe(RecipeID: ID!): Int
+    updateRecipe(id: ID!, RecipeName: String, ImageUrl: String): Recipe
+    deleteRecipe(id: ID!): Int
     updateReview(ReviewId: ID!, ReviewText: String, RecipeID: ID, Rating: Int, UserId: ID): Review
 }

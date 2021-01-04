@@ -40,6 +40,7 @@ class Recipes extends React.Component{
 
         return (
             <div>
+                <Link to="/recommendations">Get Today's Recipe Recommendation!</Link>
                 <Link to="/createRecipe">Create a new Recipe</Link>
                 <table border="solid">
                     <thead>
