@@ -35,6 +35,7 @@ fragment RecommendationContainer_query_zMsyR on Query {
     RecipeName
     ImageUrl
   }
+  allergies
 }
 */
 
@@ -106,16 +107,23 @@ return {
           }
         ],
         "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "allergies",
+        "storageKey": null
       }
     ]
   },
   "params": {
-    "cacheID": "23be42967c982c2cf7fa26a593cd9b3a",
+    "cacheID": "3048e099cfa6881702b7dea9a3318aae",
     "id": null,
     "metadata": {},
     "name": "RecommendationContainerRefetchQuery",
     "operationKind": "query",
-    "text": "query RecommendationContainerRefetchQuery(\n  $allergy: String\n) {\n  ...RecommendationContainer_query_zMsyR\n}\n\nfragment RecommendationContainer_query_zMsyR on Query {\n  topRecipesWithoutAllergy(allergy: $allergy) {\n    id\n    RecipeName\n    ImageUrl\n  }\n}\n"
+    "text": "query RecommendationContainerRefetchQuery(\n  $allergy: String\n) {\n  ...RecommendationContainer_query_zMsyR\n}\n\nfragment RecommendationContainer_query_zMsyR on Query {\n  topRecipesWithoutAllergy(allergy: $allergy) {\n    id\n    RecipeName\n    ImageUrl\n  }\n  allergies\n}\n"
   }
 };
 })();

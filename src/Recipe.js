@@ -29,8 +29,8 @@ class Recipe extends React.Component{
                 <td>{review.Rating}</td>
                 <td>{review.User.UserId}</td>
                 <td>{review.User.UserName}</td>
-                <td>Update</td>
-                <td>Delete</td>
+                <td><Link to={`/updateReview/${review.ReviewId}`}>Update</Link></td>
+                <td><Link to={`/deleteReview/${review.ReviewId}`}>Delete</Link></td>
             </tr>);
         })
     }
@@ -60,6 +60,7 @@ class Recipe extends React.Component{
                             ReviewId
                             ReviewText
                             Rating
+                            RecipeID
                             User{
                                 UserId
                                 UserName

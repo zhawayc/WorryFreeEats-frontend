@@ -17,6 +17,7 @@ export type RecommendationContainer_query = {|
     +RecipeName: ?string,
     +ImageUrl: ?string,
   |}>,
+  +allergies: ?$ReadOnlyArray<?string>,
   +$refType: RecommendationContainer_query$ref,
 |};
 export type RecommendationContainer_query$data = RecommendationContainer_query;
@@ -77,12 +78,19 @@ const node/*: ReaderFragment*/ = {
         }
       ],
       "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "allergies",
+      "storageKey": null
     }
   ],
   "type": "Query",
   "abstractKey": null
 };
 // prettier-ignore
-(node/*: any*/).hash = 'f0f8c801fac11cf0d291a24b4880393c';
+(node/*: any*/).hash = 'e13baab113f1fcb4cef4f71c9b7b781a';
 
 module.exports = node;

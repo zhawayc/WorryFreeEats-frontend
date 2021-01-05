@@ -31,6 +31,7 @@ fragment RecommendationContainer_query on Query {
     RecipeName
     ImageUrl
   }
+  allergies
 }
 */
 
@@ -93,16 +94,23 @@ const node/*: ConcreteRequest*/ = {
           }
         ],
         "storageKey": "topRecipesWithoutAllergy(allergy:\"default\")"
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "allergies",
+        "storageKey": null
       }
     ]
   },
   "params": {
-    "cacheID": "501fff7019e2477b561d2cbd55ddd1a2",
+    "cacheID": "94a6fb3df2cdfaef406dca54118b65ed",
     "id": null,
     "metadata": {},
     "name": "RecommendationsQuery",
     "operationKind": "query",
-    "text": "query RecommendationsQuery {\n  ...RecommendationContainer_query\n}\n\nfragment RecommendationContainer_query on Query {\n  topRecipesWithoutAllergy(allergy: \"default\") {\n    id\n    RecipeName\n    ImageUrl\n  }\n}\n"
+    "text": "query RecommendationsQuery {\n  ...RecommendationContainer_query\n}\n\nfragment RecommendationContainer_query on Query {\n  topRecipesWithoutAllergy(allergy: \"default\") {\n    id\n    RecipeName\n    ImageUrl\n  }\n  allergies\n}\n"
   }
 };
 // prettier-ignore

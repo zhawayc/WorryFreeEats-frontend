@@ -30,6 +30,7 @@ export type RecipeQueryResponse = {|
     +ReviewId: string,
     +ReviewText: ?string,
     +Rating: ?number,
+    +RecipeID: ?string,
     +User: ?{|
       +UserId: string,
       +UserName: ?string,
@@ -65,6 +66,7 @@ query RecipeQuery(
     ReviewId
     ReviewText
     Rating
+    RecipeID
     User {
       UserId
       UserName
@@ -213,6 +215,13 @@ v3 = [
       {
         "alias": null,
         "args": null,
+        "kind": "ScalarField",
+        "name": "RecipeID",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
         "concreteType": "User",
         "kind": "LinkedField",
         "name": "User",
@@ -257,16 +266,16 @@ return {
     "selections": (v3/*: any*/)
   },
   "params": {
-    "cacheID": "475a8c146d1fccfe2abf9de273cae67b",
+    "cacheID": "8345290d1c86a4be91620aff6e72ff38",
     "id": null,
     "metadata": {},
     "name": "RecipeQuery",
     "operationKind": "query",
-    "text": "query RecipeQuery(\n  $id: ID!\n) {\n  recipe(id: $id) {\n    id\n    RecipeName\n    ImageUrl\n    Ingredients(first: 10, after: 0) {\n      edges {\n        node {\n          id\n          Name\n          AllergyType\n        }\n      }\n    }\n  }\n  reviewsByRecipeId(id: $id) {\n    ReviewId\n    ReviewText\n    Rating\n    User {\n      UserId\n      UserName\n    }\n  }\n}\n"
+    "text": "query RecipeQuery(\n  $id: ID!\n) {\n  recipe(id: $id) {\n    id\n    RecipeName\n    ImageUrl\n    Ingredients(first: 10, after: 0) {\n      edges {\n        node {\n          id\n          Name\n          AllergyType\n        }\n      }\n    }\n  }\n  reviewsByRecipeId(id: $id) {\n    ReviewId\n    ReviewText\n    Rating\n    RecipeID\n    User {\n      UserId\n      UserName\n    }\n  }\n}\n"
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '20da793c70bb53f7b98dec7c0e819414';
+(node/*: any*/).hash = 'c414e5b3f0e09bbaef0b592c21c42359';
 
 module.exports = node;

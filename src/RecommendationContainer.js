@@ -1,5 +1,6 @@
 import { createRefetchContainer, graphql } from "react-relay";
 import React from "react";
+import { Link } from "react-router-dom";
 
 class RecommendationContainer extends React.Component{
     constructor(props){
@@ -9,20 +10,16 @@ class RecommendationContainer extends React.Component{
         };
     }
 
-    handleChange(allergy){
-        this.setState({allergy});
-    }
-
-    handleClick(){
+    handleClick(allergy){
         this.props.relay.refetch(
-            {allergy: this.state.allergy}
+            {allergy}
         )
     }
     
     render(){
         const recommendationList = this.props.query.topRecipesWithoutAllergy.map(recipe=>(
             <tr>
-                <td>{recipe.id}</td>
+                <td><Link to={`/recipe/${recipe.id}`}>{recipe.id}</Link></td>
                 <td>{recipe.RecipeName}</td>
                 <td><img style={{height: "50px", width: "80px"}} alt="not found" src={recipe.ImageUrl}/></td>
             </tr>
@@ -30,16 +27,12 @@ class RecommendationContainer extends React.Component{
 
         return(
             <div>
-                <h1>Recommendations for 10 recipes without your allergy</h1>
-                <div>e.g. MilkAllergy, EggAllergy, WheatAllergy, FishAllergy, ShellfishAllergy ...</div>
-                <label htmlFor="allergy">
-                    <input 
-                        id="allergy" 
-                        placeholder="your allergy" 
-                        onChange={(e)=>{this.handleChange(e.target.value)}}
-                        />
-                </label>
-                <button onClick={()=>{this.handleClick()}}>OK!</button>
+                <h1>Top 10 recipes of the day without your allergy</h1>
+                <label htmlFor="allergy">Please select your allergy</label>
+                <select id="allergy" name="allergy" onChange={(e)=>this.handleClick(e.target.value)}>
+                    <option>--</option>
+                    {this.props.query.allergies.map(allergy=>(<option>{allergy}</option>))}
+                </select>
                 
                 <table>
                     <thead>
@@ -91,6 +84,7 @@ export default createRefetchContainer(
                         RecipeName
                         ImageUrl
                     }
+                    allergies
             }
         `
     },

@@ -23,7 +23,7 @@ class ReviewStore extends ReduceStore{
                         "ReviewText": review.ReviewText,
                         "Rating": review.Rating,
                         "RecipeID": review.RecipeID,
-                        "UserId": review.UserId
+                        "UserId": review.User.UserId
                     });
                 })
                 console.log(newState);

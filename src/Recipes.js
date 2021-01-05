@@ -29,8 +29,6 @@ class Recipes extends React.Component{
                         {recipe.RecipeName}
                         </Link>
                     </td>
-                    
-                    <td>{"hello world"}</td>
                     <td><Ingredients recipe = {recipe}/></td>
                     <td><Link to={`/updateRecipe/${recipe.id}`}>Update</Link></td>
                     <td><Link to={`/deleteRecipe/${recipe.id}`}>Delete</Link></td>
@@ -40,15 +38,18 @@ class Recipes extends React.Component{
 
         return (
             <div>
-                <Link to="/recommendations">Get Today's Recipe Recommendation!</Link>
-                <Link to="/createRecipe">Create a new Recipe</Link>
+                <div>
+                    <Link to="/recommendations">Get Today's Recipe Recommendation!</Link>
+                </div>
+                <div>
+                    <Link to="/createRecipe">Create a new Recipe</Link>
+                </div>
                 <table border="solid">
                     <thead>
                         <tr>
                             <td>Id</td>
                             <td>Image</td>
                             <td>Name</td>
-                            <td style={{backgroundColor: "royalblue"}}>Attention</td>
                             <td>Ingredients</td>
                             <td>Update</td>
                             <td>Delete</td>
