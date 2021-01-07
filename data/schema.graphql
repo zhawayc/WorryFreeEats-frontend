@@ -61,11 +61,16 @@ type Query{
     reviewsByRecipeId(id: ID!): [Review]
     topRecipes: [Recipe]
     topRecipesWithoutAllergy(allergy: String): [Recipe]
+    allergies: [String]
 }
 
 type Mutation{
     addRecipe(RecipeName: String, ImageUrl: String): Recipe
     updateRecipe(id: ID!, RecipeName: String, ImageUrl: String): Recipe
     deleteRecipe(id: ID!): Int
+    addReview(ReviewText: String, RecipeID: ID, Rating: Int, UserId: ID): Review
     updateReview(ReviewId: ID!, ReviewText: String, RecipeID: ID, Rating: Int, UserId: ID): Review
+    deleteReview(id: ID!): Int
+    userRegister(UserName: String!, UserPass: String!, FirstName: String, Email: String): User
+    userLogin(UserName: String, UserPass: String): User
 }

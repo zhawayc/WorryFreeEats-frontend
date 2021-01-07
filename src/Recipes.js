@@ -1,6 +1,7 @@
 import React from "react";
 import { createPaginationContainer, graphql } from "react-relay";
 import { Link } from "react-router-dom";
+import Banner from "./Banner";
 import Ingredients from "./Ingredients";
 
 class Recipes extends React.Component{
@@ -38,6 +39,9 @@ class Recipes extends React.Component{
 
         return (
             <div>
+                <div>
+                    <Banner />
+                </div>
                 <div>
                     <Link to="/recommendations">Get Today's Recipe Recommendation!</Link>
                 </div>

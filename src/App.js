@@ -6,7 +6,6 @@ import Recipes from "./Recipes";
 function App(props) {
 
   function getProps(){
-    console.log(props);
     return props;
   }
 

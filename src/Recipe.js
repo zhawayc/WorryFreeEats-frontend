@@ -3,6 +3,7 @@ import { graphql } from "graphql";
 import { QueryRenderer } from "react-relay";
 import {Link} from "react-router-dom";
 import environment from "./Environment";
+import cookie from "react-cookies";
 
 class Recipe extends React.Component{
 
@@ -45,7 +46,7 @@ class Recipe extends React.Component{
                             id
                             RecipeName
                             ImageUrl
-                            Ingredients(first: 10, after: 0){
+                            Ingredients(first: 20, after: 0){
                                 edges{
                                     node{
                                         id
@@ -101,6 +102,11 @@ class Recipe extends React.Component{
                                 </table>
                             </div>
                             <h1>Reviews List</h1>
+                            {
+                                cookie.load("user")?
+                                <Link to={`/createReview/${props.recipe.id}`}>Add a new Review!</Link>:
+                                <Link to="/userLogin">Login to add Review!</Link>
+                            }
                             <table border="solid">
                                 <thead>
                                     <tr>

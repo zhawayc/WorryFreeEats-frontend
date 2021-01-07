@@ -52,7 +52,7 @@ query RecipeQuery(
     id
     RecipeName
     ImageUrl
-    Ingredients(first: 10, after: 0) {
+    Ingredients(first: 20, after: 0) {
       edges {
         node {
           id
@@ -132,7 +132,7 @@ v3 = [
           {
             "kind": "Literal",
             "name": "first",
-            "value": 10
+            "value": 20
           }
         ],
         "concreteType": "IngredientConnection",
@@ -178,7 +178,7 @@ v3 = [
             "storageKey": null
           }
         ],
-        "storageKey": "Ingredients(after:0,first:10)"
+        "storageKey": "Ingredients(after:0,first:20)"
       }
     ],
     "storageKey": null
@@ -266,16 +266,16 @@ return {
     "selections": (v3/*: any*/)
   },
   "params": {
-    "cacheID": "8345290d1c86a4be91620aff6e72ff38",
+    "cacheID": "ab912f2bfe855804be48c6b10703b26e",
     "id": null,
     "metadata": {},
     "name": "RecipeQuery",
     "operationKind": "query",
-    "text": "query RecipeQuery(\n  $id: ID!\n) {\n  recipe(id: $id) {\n    id\n    RecipeName\n    ImageUrl\n    Ingredients(first: 10, after: 0) {\n      edges {\n        node {\n          id\n          Name\n          AllergyType\n        }\n      }\n    }\n  }\n  reviewsByRecipeId(id: $id) {\n    ReviewId\n    ReviewText\n    Rating\n    RecipeID\n    User {\n      UserId\n      UserName\n    }\n  }\n}\n"
+    "text": "query RecipeQuery(\n  $id: ID!\n) {\n  recipe(id: $id) {\n    id\n    RecipeName\n    ImageUrl\n    Ingredients(first: 20, after: 0) {\n      edges {\n        node {\n          id\n          Name\n          AllergyType\n        }\n      }\n    }\n  }\n  reviewsByRecipeId(id: $id) {\n    ReviewId\n    ReviewText\n    Rating\n    RecipeID\n    User {\n      UserId\n      UserName\n    }\n  }\n}\n"
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'c414e5b3f0e09bbaef0b592c21c42359';
+(node/*: any*/).hash = 'adc83868064908ee350b972d1d722806';
 
 module.exports = node;

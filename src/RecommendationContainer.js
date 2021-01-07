@@ -1,6 +1,7 @@
 import { createRefetchContainer, graphql } from "react-relay";
 import React from "react";
 import { Link } from "react-router-dom";
+import cookie from "react-cookies";
 
 class RecommendationContainer extends React.Component{
     constructor(props){
@@ -33,6 +34,7 @@ class RecommendationContainer extends React.Component{
                     <option>--</option>
                     {this.props.query.allergies.map(allergy=>(<option>{allergy}</option>))}
                 </select>
+                {console.log(cookie.loadAll())}
                 
                 <table>
                     <thead>

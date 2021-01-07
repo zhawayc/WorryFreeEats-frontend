@@ -12,13 +12,14 @@ import {
     return fetch('http://localhost:8080/graphql', {
       method: 'POST',
       mode: 'cors',
+      credentials: "include",
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         query: operation.text,
         variables,
-      }),
+      })
     }).then(response => {
       return response.json();
     });
